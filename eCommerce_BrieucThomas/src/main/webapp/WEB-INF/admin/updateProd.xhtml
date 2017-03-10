@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Modifier produit</title>
+</h:head>
+<h:body>
+
+	<f:event type="preRenderView" listener="#{adminMb.getAllProd}" />
+
+	<!-- 	Insertion du header -->
+	<ui:insert>
+		<ui:include src="/resources/templates/headerAdmin.xhtml" />
+	</ui:insert>
+
+	<br />
+	<div class="titreAdmin">
+		<h1>Modifier un produit</h1>
+	</div>
+	<br />
+
+	<!-- Affichage de la liste des produits -->
+	<h:form id="formulaire" styleClass="formAjout" enctype="multipart/form-data">
+		<div class="panelAdmin">
+			<p:panelGrid columns="1" styleClass="selectId">
+				<p:selectOneMenu id="id" value="#{adminMb.idProd}">
+					<f:selectItems value="#{adminMb.listeProduits}" var="prod"
+						itemLabel="#{prod.idProduit} #{prod.designation}"
+						itemValue="#{prod.idProduit}" />
+					<p:ajax event="change" update="@form"
+						listener="#{adminMb.refreshProd}" imediate="true" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+			<hr />
+			<p:panelGrid columns="3">
+				<h:outputText value="Désignation" />
+				<p:inputText id="designation" value="#{adminMb.produit.designation}" />
+				<p:message for="designation" />
+
+				<h:outputText value="Description" />
+				<p:inputText id="description" value="#{adminMb.produit.description}" />
+				<p:message for="description" />
+
+				<h:outputText value="Catégorie" />
+				<p:selectOneMenu id="categorie" value="#{adminMb.idCat}">
+					<f:selectItems value="#{adminMb.listeCategories}" var="cat"
+						itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}" />
+				</p:selectOneMenu>
+				<p:message for="categorie" />
+
+				<h:outputText value="Prix" />
+				<p:inputText id="prix" value="#{adminMb.produit.prix}" />
+				<p:message for="prix" />
+
+				<h:outputText value="Quantité" />
+				<p:inputText id="quantite" value="#{adminMb.produit.quantite}" />
+				<p:message for="quantite" />
+
+				<h:outputText value="Image" />
+				<p:fileUpload id="image" value="#{adminMb.uploadedFile}"
+					mode="simple" skinSimple="true" />
+				<p:message for="image" />
+			</p:panelGrid>
+			<br />
+			<h:commandButton value="Modifier" action="#{adminMb.upateProd}" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>

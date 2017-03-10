@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition>
+		<h:outputStylesheet library="css" name="styleAdmin.css" />
+		<h:outputStylesheet library="css" name="bootstrap.css" />
+
+		<!-- 	Appel de la méthode de contrôle de la connexion -->
+		<f:event type="preRenderView" listener="#{adminMb.checkPermissions}" />
+
+		<h:form styleClass="headerAdmin">
+			<p:commandButton value="Accueil Client" action="/accueil.xhtml"
+				styleClass="boutonMenuCl" />
+			<p:commandButton value="Accueil Admin" action="/admin/accueil.xhtml"
+				styleClass="boutonMenuCl" />
+			<p:commandButton value="Ajout Catégorie" action="/admin/addCat.xhtml"
+				styleClass="boutonMenuCl" />
+			<p:commandButton value="Ajout Produit" action="/admin/addProd.xhtml"
+				styleClass="boutonMenuCl" />
+			<p:commandButton value="Suppression Produit"
+				action="/admin/delProd.xhtml" styleClass="boutonMenuCl" />
+			<p:commandButton value="Modification Produit"
+				action="/admin/updateProd.xhtml" styleClass="boutonMenuCl" />
+			<p:commandButton value="Utilisateur : #{adminMb.adminProd.nom}"
+				action="#{adminMb.deconnexion}" styleClass="boutonMenuClUser" />
+		</h:form>
+	</ui:composition>
+</h:body>
+</html>

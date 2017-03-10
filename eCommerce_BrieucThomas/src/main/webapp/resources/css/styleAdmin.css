@@ -1,0 +1,168 @@
+@CHARSET "ISO-8859-1";
+
+/* ************************************ Style admin *************************************** */
+body {
+	background-image: url("/eCommerce/resources/images/hairpin.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	text-align: center;
+}
+
+.titreAdmin {
+	background-color: rgba(200, 200, 200, 0.5);
+	width: 40%;
+	padding: 10px 0 20px 0;
+	margin-left: 30%;
+	border-radius: 8px;
+}
+
+.headerAdmin {
+	width: 100%;
+	border-bottom: 2px solid #505050;
+	background-color: rgba(80, 80, 80, 0.6);
+	padding: 10px 8% 10px 8%;
+	text-align: center;
+}
+
+.boutonMenuCl {
+	width: 11%;
+	height: 60px;
+	margin-right: 1%;
+	padding-left: 2px;
+}
+
+.boutonMenuClUser {
+	width: 15%;
+	height: 60px;
+	margin-right: 1%;
+}
+
+.titreCl {
+	text-align: center;
+	font-family: fantasy;
+	font-size: 40px;
+	color: rgb(168, 200, 217);
+	margin: 10px 0 10px 0;
+}
+
+.afficheProd {
+	width: 90%;
+	text-align: center;
+	margin-left: 5%;
+}
+
+.coloneImage {
+	width: 10%;
+	text-align: center;
+}
+
+.coloneId {
+	width: 4%;
+	text-align: center;
+}
+
+.coloneDesination {
+	width: 16%;
+	text-align: center;
+}
+
+.coloneDescription {
+	width: 30%;
+	text-align: left;
+}
+
+.colonePrix {
+	width: 10%;
+	text-align: center;
+}
+
+.coloneCategorie {
+	width: 10%;
+	text-align: center;
+}
+
+.coloneQuantiteSelect {
+	width: 10%;
+	text-align: center;
+}
+
+.coloneQuantite {
+	width: 10%;
+	text-align: center;
+}
+
+.coloneSelect {
+	width: 10%;
+	text-align: center;
+}
+
+.descCat {
+	color: rgb(49, 89, 111);
+}
+
+.globalCommande {
+	width: 90%;
+	margin: 20px 0 0 5%;
+}
+
+.total {
+	margin-top: 90px;
+}
+
+.boutonCmd {
+	margin: 5px 0 5px 10%;
+	width: 110px;
+}
+
+.formCommande {
+	width: 60%;
+	position: relative;
+	margin: -180px 0 0 39%;
+}
+
+.affichePdf {
+	margin-left: 2.5%;
+}
+
+.ui-panelgrid td, tr {
+	background-color: transparent !important;
+	border: 0 !important;
+}
+
+.formLogin {
+	background-color: rgba(200, 200, 200, 0.5);
+	width: 45%;
+	margin-left: 27.5%;
+	border-radius: 8px;
+	padding: 12px 10px 12px 10px;
+}
+
+.panelLogin {
+	width: 60%;
+	margin-left: 20%;
+}
+
+.titreLogin {
+	width: 40%;
+	margin: 20px 0 0 30%;
+	color: white;
+}
+
+
+.formAjout{
+	width: 40%;
+	margin-left: 30%;
+	background-color: rgba(230,230,230,0.5);
+	padding: 10px 0 20px 0;
+	border-radius: 8px;
+}
+
+
+.selectId{
+	margin-left: 22%;
+}
+.panelAdmin {
+	width: 40%;
+	margin-left: 15%;
+}

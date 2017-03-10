@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Login</title>
+	<h:outputStylesheet library="css" name="styleAdmin.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+
+<h:body>
+	<!-- 	Appel de la méthode de vérification des autorisation -->
+	<!-- 	Si l'utilisateur est déjà identifié, il sera redirigé vers l'accueil -->
+	<f:event type="preRenderView"
+		listener="#{adminMb.checkPermissionslogin}" />
+	<div class="titreLogin">
+		<h1>Espace administrateur</h1>
+		<h2>Veuillez vous identifier</h2>
+	</div>
+	
+	<br />
+	<h:form styleClass="formLogin">
+		<h:inputText value="#{adminMb.messageFailConnect}" disabled="true"
+			id="message" rendered="#{adminMb.afficheMessage}" />
+
+		<p:panelGrid columns="3" styleClass="panelLogin">
+			<h:outputText value="email " />
+			<p:inputText id="email" value="#{adminMb.adminProd.email}" />
+			<p:message for="email" />
+
+			<h:outputText value="Password " />
+			<p:password id="password" value="#{adminMb.adminProd.password}" />
+			<p:message for="password" />
+		</p:panelGrid>
+		<br />
+		<p:button value="Retour" href="/accueil.xhtml" />
+		<p:commandButton value="Connexion" action="#{adminMb.connexion}"
+			update="message" />
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition>
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:outputStylesheet library="css" name="bootstrap.css" />
+
+
+		<h:form styleClass="menuCl">
+		
+			<h1 class="titreCl">Auto Toto</h1>
+		
+		
+			<p:button value="Achats" href="/accueil.xhtml"
+				styleClass="boutonMenuCl" />
+			<p:button value="Panier ( #{clientMb.nbrProduitPanier} )"
+				href="/panier.xhtml" styleClass="boutonMenuCl" />
+			<p:button value="Administrateur" href="/admin/accueil.xhtml"
+				styleClass="boutonMenuCl" />
+		</h:form>
+	</ui:composition>
+</h:body>
+</html>

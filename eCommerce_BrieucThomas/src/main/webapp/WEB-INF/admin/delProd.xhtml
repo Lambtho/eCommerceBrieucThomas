@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Suppression produit</title>
+</h:head>
+<h:body>
+
+	<f:event type="preRenderView" listener="#{adminMb.getAllProd}" />
+
+	<!-- 	Insertion du header -->
+	<ui:insert>
+		<ui:include src="/resources/templates/headerAdmin.xhtml" />
+	</ui:insert>
+	
+	<br />
+	<div class="titreAdmin">
+	<h1>Supprimer un produit</h1>
+	</div>
+	<br />
+
+	<!-- Affichage de la liste des produits -->
+	<h:form styleClass="formAjout">
+		<p:panelGrid columns="3" styleClass="panelAdmin">
+			<p:selectOneMenu id="id" value="#{adminMb.idProd}" styleClass="selectId">
+				<f:selectItems value="#{adminMb.listeProduits}" var="prod"
+					itemLabel="#{prod.idProduit} #{prod.designation}" itemValue="#{prod.idProduit}" />
+			</p:selectOneMenu>
+
+		</p:panelGrid>
+		<br/>
+		<h:commandButton value="Suppression" action="#{adminMb.delProduit}" />
+	</h:form>
+
+</h:body>
+</html>

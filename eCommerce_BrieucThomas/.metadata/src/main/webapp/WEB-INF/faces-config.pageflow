@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14884841749810" configfile="/eCommerce_BrieucThomas/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="178" id="pf14884906103741" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf14884906103753 pf14886406111350" inlinks="pf14884906103753" path="/admin/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="562" id="pf14884906103754" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14884906103755 pf14886406111351 pf14887093090140" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="patient.xhtml" x="338" y="370" id="pf14884906103757" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14884906103755 pf14886406111350" path="/admin/accueil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="rdv.xhtml" x="122" y="948" id="pf14884906103758" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" path="/rdv.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin/accueil.xhtml" x="122" y="1333" id="pf14884906103769" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/admin/accueil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" id="pf14886406111362" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf14886406111351" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="facture.xhtml" id="pf14887093090141" referenceLink="//@navigationRule.1/@navigationCase.2/@toViewId|" inlinks="pf14887093090140" path="/facture.xhtml"/>
+  <links id="pf14884906103755" target="pf14884906103757" source="pf14884906103754"/>
+  <links id="pf14886406111350" target="pf14884906103757" source="pf14884906103741"/>
+  <links id="pf14884906103753" target="pf14884906103741" source="pf14884906103741">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf14886406111351" target="pf14886406111362" source="pf14884906103754"/>
+  <links id="pf14887093090140" target="pf14887093090141" source="pf14884906103754"/>
+</pageflow:Pageflow>

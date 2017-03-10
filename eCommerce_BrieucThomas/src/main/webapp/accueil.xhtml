@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Accueil</title>
+</h:head>
+<h:body>
+	<f:event type="preRenderView" listener="#{clientMb.getAllProd}" />
+	<f:event type="preRenderView" listener="#{clientMb.getAllProd}" />
+
+	<!-- 	Insertion du header -->
+	<ui:insert>
+		<ui:include src="/resources/templates/headerClient.xhtml" />
+	</ui:insert>
+
+	<!-- Barre de recherche -->
+	<h:form styleClass="barreRecherche">
+		<p:selectOneMenu id="categorie" styleClass="rechercheCat"
+			value="#{clientMb.idCategorie}">
+			<f:selectItems value="#{clientMb.listeCategories}" var="cat"
+				itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}" />
+		</p:selectOneMenu>
+
+		<h:inputText styleClass="rechercheBarre" value="#{clientMb.keyword}" />
+		<p:commandButton styleClass="rechercheBouton" value="Rechercher"
+			update="@all" />
+		<p class="descCat">
+			<h:outputText value="#{clientMb.categorie.nomCategorie} : " />
+			<h:outputText value="#{clientMb.categorie.description}" />
+		</p>
+	</h:form>
+
+	<h:form styleClass="afficheProd">
+		<p:dataTable var="produit" value="#{clientMb.listeProduits}"
+			id="afficheProd">
+			
+			<p:column styleClass="coloneImage">
+				<p:graphicImage url="imagesAffich/image#{produit.idProduit}.jpg" width="100%" />
+			</p:column>
+			
+			<p:column headerText="Id" styleClass="coloneId">
+				<h:outputText value="#{produit.idProduit}" />
+			</p:column>
+			<p:column headerText="Désignation" styleClass="coloneDesination">
+				<h:outputText value="#{produit.designation}" />
+			</p:column>
+			<p:column headerText="Description" styleClass="coloneDescription">
+				<h:outputText value="#{produit.description}" />
+			</p:column>
+			<p:column headerText="Prix" styleClass="colonePrix">
+				<h:outputText value="#{produit.prix}" />
+			</p:column>
+			<p:column headerText="Catégorie" styleClass="coloneCategorie">
+				<h:outputText value="#{produit.categorie.nomCategorie}" />
+			</p:column>
+
+			<!-- 				Champ de saisie du nombre de produits à acheter -->
+			<p:column headerText="Quantité" styleClass="coloneQuantiteSelect">
+				<p:selectOneMenu value="#{clientMb.quantiteSelect}" required="true"
+					id="saisieQtt" styleClass="inputQtt">
+					<f:selectItems value="#{produit.listeQuantite}" var="qtt"
+						itemValue="#{qtt}" itemLabel="#{qtt}" />
+					<p:ajax event="change" listener="#{clientMb.updateQuantite}"
+						imediate="true" />
+				</p:selectOneMenu>
+			</p:column>
+
+			<!-- 				Bouton pour ajouter le produit au panier -->
+			<p:column styleClass="coloneSelect">
+				<h:commandButton action="#{clientMb.selectProduct}" value="Panier"
+					styleClass="boutonSelect">
+
+					<!-- renvoi le produit de la ligne dans la variable de produit (utilisation d'un listenner) -->
+					<f:setPropertyActionListener value="#{produit}"
+						target="#{clientMb.produit}" />
+				</h:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

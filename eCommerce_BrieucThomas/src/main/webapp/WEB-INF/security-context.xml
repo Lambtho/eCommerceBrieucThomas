@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<!-- Définition de la datasource -->
+	<context:property-placeholder
+		location="classpath*:basededonnees_infos.properties" />
+
+	<!-- Définition du bean datasource -->
+	<bean id="dataSourceBean1"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	<!-- Http intercept les URL -->
+	<!-- Déclaration des URL sécurisées et des autorisations -->
+	<security:http>
+
+		<!-- Interception des urL -->
+		<security:intercept-url pattern="/admin/cat/**"
+			access="ROLE_ADMIN_CAT" />
+		<security:form-login login-page="/admin/login"
+			authentication-failure-url="/admin/login" />
+
+		<security:intercept-url pattern="/admin/prod/**"
+			access="ROLE_ADMIN_CAT,ROLE_ADMIN_PROD" />
+		<security:form-login login-page="/admin/login"
+			authentication-failure-url="/admin/login" />
+
+		<security:logout invalidate-session="true"
+			logout-success-url="/admin/login" />
+
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+
+			<security:jdbc-user-service
+				data-source-ref="dataSourceBean1"
+				users-by-username-query="SELECT email_admin as username, password_admin as password, actived FROM administrateurs WHERE username=?"
+				authorities-by-username-query="SELECT a.email_admin as username, r.namerole FROM administrateurs a, roles r WHERE r.id_role=a.role_id_fk AND a.username=?" />
+
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>
