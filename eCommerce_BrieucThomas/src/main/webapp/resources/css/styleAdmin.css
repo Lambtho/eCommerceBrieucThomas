@@ -2,7 +2,7 @@
 
 /* ************************************ Style admin *************************************** */
 body {
-	background-image: url("/eCommerce/resources/images/hairpin.jpg");
+	background-image: url("/eCommerce_BrieucThomas/resources/images/route.jpg");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -50,6 +50,7 @@ body {
 	width: 90%;
 	text-align: center;
 	margin-left: 5%;
+	background-color: rgba(255, 255, 255, 0.3);
 }
 
 .coloneImage {

@@ -22,39 +22,41 @@
 
 <body>
 
+
 <%@include file="/resources/templates/headerAdmin.jsp"%>
 
 	<br />
 	<div class="titreAdmin">
-		<h1>Accueil</h1>
+		<h1>Ajout d'une Categorie</h1>
 	</div>
 	<br />
+<h1>Formulaire Ajout/Edit</h1>
+	<form:form method="POST" action="soumettreAddCat"
+		commandName="addCategorie">
+	
+		<!-- ModelAttribute ou modelAttribute -->
 
-	<!-- Affichage de la liste des produits -->
-	<table class="afficheProd">
-		<tr class="tableHeader">
-			<th>Image</th>
-			<th>Id</th>
-			<th>Désignation</th>
-			<th>Description</th>
-			<th>Prix</th>
-			<th>Quantité</th>
-			<th>Catégorie</th>
-		</tr>
-		<c:forEach var="produit" items="${listeProduit}">
+		<table>
+		
 			<tr>
-				<th><img src="/imagesAffich/image${produit.idProduit}.jpg" width="100px"/></th>
-				<th>${produit.idProduit}</th>
-				<th>${produit.designation}</th>
-				<th>${produit.description}</th>
-				<th>${produit.prix}</th>
-				<th>${produit.quantite}</th>
-				<th>${produit.categorie.nomCategorie}</th>
-				<th><a href="admin/soumettreSupProduit?id_param=${produit.idProduit}">Supprimer</a></th>
-				<th><a href="admin/formModifProduit?id_param=${produit.idProduit}">Modifier</a></th>
+				<td><form:label path="nomCategorie"> nom Categorie</form:label></td>
+				<td><form:input path="nomCategorie" /></td>
+				<td><form:errors path="nomCategorie" cssStyle="color:red" />
+				</td>
 			</tr>
-			</c:forEach>
-	</table>
+			<tr>
+				<td><form:label path="description">Description</form:label></td>
+				<td><form:input path="description" /></td>
+				<td><form:errors path="description" cssStyle="color:red" /></td>
+			</tr>
 
+
+			<tr>
+				<td><input type="submit" value="submit"></td>
+			</tr>
+		</table>
+
+	</form:form>
+	<br />
 </body>
 </html>

@@ -49,7 +49,7 @@ public class AdminController {
 		model.put("listeProduit", listeProduits);
 		System.out.println("je passe par accueil admin");
 
-		return "admin/accueil";
+		return "/admin/accueil";
 	}
 	
 	@RequestMapping(value="getAllCat", method=RequestMethod.GET)
@@ -65,7 +65,7 @@ public class AdminController {
 	
 	//Methode Ajout de Produit--------------------------------------
 	//Mise en place du Formulaire 
-	@RequestMapping(value="formAddProd",method=RequestMethod.GET)
+	@RequestMapping(value="/formAddProd",method=RequestMethod.GET)
 	public ModelAndView formulaireAddProduit(Model model){
 		System.out.println("je passe par ce controller");
 		
@@ -77,7 +77,7 @@ public class AdminController {
 	}
 
 	//Soumission du Formulaire
-	@RequestMapping(value="soumettreAddProduit",method=RequestMethod.POST)
+	@RequestMapping(value="/soumettreAddProduit",method=RequestMethod.POST)
 	@ModelAttribute("produitForm")
 	public String soumettreFormAddProduit(ModelMap model, Produit produit, String idCategorie){
 		System.out.println(idCategorie);
@@ -101,21 +101,21 @@ public class AdminController {
 		model.put("listeCategorie",listCat);
 			
 		System.out.println("je met a jour la liste produit");
-		return "admin/accueil";
+		return "/admin/accueil";
 		
 	}
 	
 	//---------------------Delete Produit
 
 	//Soumission du Formulaire
-	@RequestMapping(value="soumettreSupProduit",method=RequestMethod.GET)
+	@RequestMapping(value="/soumettreSupProduit",method=RequestMethod.GET)
 	public String soumettreSupProduit(ModelMap model,@RequestParam("id_param") long id ){
 		System.out.println(id);
 		administrateurService.delProductService(id);
 		
 		
 		System.out.println("je met a jour la liste produit");
-		return "admin/accueil";
+		return "/admin/accueil";
 		
 	}
 	
@@ -123,7 +123,7 @@ public class AdminController {
 	//--------------------Modification Produit---------------------
 	
 	//Mise en place du Formulaire
-	@RequestMapping(value="formModifProduit",method=RequestMethod.GET)
+	@RequestMapping(value="/formModifProduit",method=RequestMethod.GET)
 	public String formModifProduit(ModelMap model,@RequestParam("id_param") long idProduit){
 		System.out.println(idProduit);
 		Produit produit=administrateurService.getByIdProductService(idProduit);
@@ -132,7 +132,24 @@ public class AdminController {
 		return "admin/addProd";
 	}
 	
+	//Methode Ajout de Categorie--------------------------------------
+			//Mise en place du Formulaire 
+			@RequestMapping(value="formAddCat",method=RequestMethod.GET)
+			public ModelAndView formulaireAddProduit(){
+				System.out.println("je passe par ce controller");
+				return new ModelAndView("admin/addCat","addCategorie",new Categorie());
+			}
 
+			//Soumission du Formulaire
+			@RequestMapping(value="soumettreAddCat",method=RequestMethod.POST)
+			public String soumettreFormAddCategorie(Model model, Categorie categorie ){
+			
+						administrateurService.addCategorie(categorie);		
+			
+						
+				return "/admin/accueil";
+	}
+			
 	
 	
 	
