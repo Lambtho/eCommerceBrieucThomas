@@ -2,7 +2,8 @@
 
 /* ************************************ Style client *************************************** */
 body {
-	background-image: url("/eCommerce/resources/images/route.jpg");
+	background-image:
+		url("/eCommerce_BrieucThomas/resources/images/route.jpg");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -25,7 +26,14 @@ body {
 .boutonMenuCl {
 	width: 20%;
 	height: 60px;
-	margin-right: 10%;
+	margin: 20px 5% 0 0;
+	padding: 10px 40px 10px 40px; border : 1px grey solid;
+	background-color: rgba(180, 180, 180, 0.5);
+	border: 1px grey solid;
+}
+
+.boutonMenuCl:HOVER {
+	background-color: rgba(200, 200, 200, 0.6);
 }
 
 .titreCl {
@@ -33,7 +41,7 @@ body {
 	font-family: fantasy;
 	font-size: 40px;
 	color: rgb(168, 200, 217);
-	margin: 10px 0 10px 0;
+	margin: 10px 0 20px 0;
 }
 
 .barreRecherche {
@@ -42,10 +50,11 @@ body {
 	padding: 5px 10% 5px 10%;
 	text-align: center;
 }
-
 .rechercheCat {
-	position: absolute;
+	height: 38px;
+	width: 8%; position : absolute;
 	margin-top: 2px;
+	position: absolute;
 }
 
 .rechercheBarre {
@@ -62,6 +71,15 @@ body {
 	width: 90%;
 	text-align: center;
 	margin-left: 5%;
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tableHeader {
+	background-color: rgba(80, 80, 80, 0.8);
+}
+
+th {
+	border: 1px grey solid;
 }
 
 .coloneImage {
@@ -108,9 +126,14 @@ body {
 	color: rgb(49, 89, 111);
 }
 
+
+
+
 .globalCommande {
 	width: 90%;
 	margin: 20px 0 0 5%;
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 8px;
 }
 
 .total {
@@ -125,7 +148,7 @@ body {
 .formCommande {
 	width: 60%;
 	position: relative;
-	margin: -180px 0 0 39%;
+	margin: -130px 0 0 39%;
 }
 
 .affichePdf {

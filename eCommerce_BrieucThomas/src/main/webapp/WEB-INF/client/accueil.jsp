@@ -10,6 +10,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
 <title>Accueil</title>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap.css" />"
 	rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery-3.1.1.js" />"></script>
@@ -20,22 +21,22 @@
 	<!-- 	Insertion du header -->
 	<%@include file="/resources/templates/headerClient.jsp"%>
 
-	<!-- Barre de recherche -->
-	<form class="barreRecherche" method="get"
-		action="${pageContext.request.contextPath}/client">
-		<select id="categorie" class="rechercheCat" name="idCategorie">
-			<c:forEach items="${listeCategories}" var="cat">
-				<option value="${cat.idCategorie}">${cat.nomCategorie}</option>
-			</c:forEach>
-		</select> <input class="rechercheBarre" type="text" name="keyword"
-			value="${keyword}" /> <input type="submit" value="Rechercher">
-		<p class="descCat">${categorie.nomCategorie}
-			${categorie.description}</p>
-	</form>
-
+	<div class="barreRecherche">
+		<!-- Barre de recherche -->
+		<form method="get" action="${pageContext.request.contextPath}/client">
+			<select id="categorie" class="rechercheCat" name="idCategorie">
+				<c:forEach items="${listeCategories}" var="cat">
+					<option value="${cat.idCategorie}">${cat.nomCategorie}</option>
+				</c:forEach>
+			</select> <input class="rechercheBarre" type="text" name="keyword"
+				value="${keyword}" /> <input type="submit" value="Rechercher" class="rechercheBouton">
+			<p class="descCat">${categorie.nomCategorie}
+				${categorie.description}</p>
+		</form>
+	</div>
 	<!-- Affichage de la liste des produits -->
 	<table class="afficheProd">
-		<tr>
+		<tr class="tableHeader">
 			<th>Image</th>
 			<th>Id</th>
 			<th>Désignation</th>
@@ -48,8 +49,10 @@
 
 		<c:forEach var="produit" items="${listeProduits}">
 			<tr>
-			<td><img src="${pageContext.request.contextPath}/client/photo?idProduit=${produit.idProduit}" width="100px" /></td>
-				
+				<td><img
+					src="${pageContext.request.contextPath}/client/photo?idProduit=${produit.idProduit}"
+					width="100px" /></td>
+
 				<th>${produit.idProduit}</th>
 				<th>${produit.designation}</th>
 				<th>${produit.description}</th>

@@ -330,7 +330,6 @@ public class ClientController {
 		Produit produit = new Produit();
 		produit.setIdProduit(idProduit);
 		produit = clientService.getProductByIdService(produit);
-		System.out.println(produit);
 
 		// S'il n'y a pas de photo associée à l'employé
 		if (produit.getImage() == null) {
