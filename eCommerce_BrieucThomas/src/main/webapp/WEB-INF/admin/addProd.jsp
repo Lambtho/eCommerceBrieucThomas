@@ -14,10 +14,16 @@
 
 	<h1>Formulaire Ajout/Edit</h1>
 	<form:form method="POST" action="soumettreAddProduit"
-		commandName="addProduit">
+		commandName="produitForm">
+	
 		<!-- ModelAttribute ou modelAttribute -->
 
 		<table>
+		<tr>
+				<td>${produitForm.idProduit}</td>
+				<td><form:input path="idProduit"/></td>
+
+			</tr>
 			<tr>
 				<td><form:label path="designation"> Designation</form:label></td>
 				<td><form:input path="designation" /></td>
@@ -32,11 +38,11 @@
 
 <tr>
 			<td><form:label path="categorie">Categorie</form:label></td>
-			<td><form:select path="categorie">
+			<td><select name="idCategorie">
 			<c:forEach items="${listeCategorie}" var="cat">
 				<option value="${cat.idCategorie}">${cat.nomCategorie}</option>
 			</c:forEach>
-			</form:select></td>
+			</select></td>
 			<td><form:errors path="categorie" cssStyle="color:red" /></td>
 		
 	</tr>		

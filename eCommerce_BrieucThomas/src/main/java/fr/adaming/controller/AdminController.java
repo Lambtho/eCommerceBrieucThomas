@@ -1,18 +1,18 @@
 package fr.adaming.controller;
 
 
-import java.io.IOException;
-import java.io.InputStream;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+
+
 import java.util.List;
 
 
 
-import org.apache.commons.io.IOUtils;
-import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,49 +73,48 @@ public class AdminController {
 		
 		model.addAttribute("listeCategorie",listCat);
 		
-		return new ModelAndView("admin/addProd","addProduit",new Produit());
+		return new ModelAndView("admin/addProd","produitForm",new Produit());
 	}
 
 	//Soumission du Formulaire
 	@RequestMapping(value="soumettreAddProduit",method=RequestMethod.POST)
+	@ModelAttribute("produitForm")
 	public String soumettreFormAddProduit(ModelMap model, Produit produit, String idCategorie){
 		System.out.println(idCategorie);
+		if(produit.getIdProduit()==0){
+			// On met la catégorie selectionnée dans le produit
+			produit.setCategorie(administrateurService.getByIdCategorieService(Long.parseLong(idCategorie)));
 			
-		
-		// On met la catégorie selectionnée dans le produit
-		produit.setCategorie(administrateurService.getByIdCategorieService(Long.parseLong(idCategorie)));
-		
-		produit.setImage(null);
+			produit.setImage(null);
+			
+			administrateurService.addProductService(produit);
+			}else{
+				// On met la catégorie selectionnée dans le produit
+				produit.setCategorie(administrateurService.getByIdCategorieService(Long.parseLong(idCategorie)));
+				
+				produit.setImage(null);
+				administrateurService.updateProductService(produit);
+			}	
 		
 				
-			
-		
-		administrateurService.addProductService(produit);
-		
 		List<Categorie> listCat=administrateurService.getAllCategorieService();
 		model.put("listeCategorie",listCat);
-				
+			
+		System.out.println("je met a jour la liste produit");
 		return "admin/accueil";
 		
 	}
 	
 	//---------------------Delete Produit
-	//mise en place du Formulaire RMQ on utilise une methode utilisant le paramètre id mis en place dans l'url
-	
-	@RequestMapping(value="formSupProduit",method=RequestMethod.GET)
-	public String formSupProduit(){
-		
-		return "delProd";	
-	}
+
 	//Soumission du Formulaire
 	@RequestMapping(value="soumettreSupProduit",method=RequestMethod.GET)
 	public String soumettreSupProduit(ModelMap model,@RequestParam("id_param") long id ){
 		System.out.println(id);
 		administrateurService.delProductService(id);
 		
-		List<Categorie> listCat=administrateurService.getAllCategorieService();
-		model.put("listeCategorie",listCat);
 		
+		System.out.println("je met a jour la liste produit");
 		return "admin/accueil";
 		
 	}
@@ -125,22 +124,15 @@ public class AdminController {
 	
 	//Mise en place du Formulaire
 	@RequestMapping(value="formModifProduit",method=RequestMethod.GET)
-	public ModelAndView formModifProduit(){
-		return new ModelAndView("updateProd","ModifProduit",new Produit());
+	public String formModifProduit(ModelMap model,@RequestParam("id_param") long idProduit){
+		System.out.println(idProduit);
+		Produit produit=administrateurService.getByIdProductService(idProduit);
+		model.addAttribute("produitForm", produit);
+		
+		return "admin/addProd";
 	}
 	
-	//Soumission du formulaire
-	
-	public String soumettreModifProduit(ModelMap model,Produit produit,UploadedFile uploadedFile){
-		
-		
-		
-		administrateurService.updateProductService(produit);
-		List<Categorie> listCat=administrateurService.getAllCategorieService();
-		model.put("listeCategorie",listCat);
-		return "admin/accueil";
-		
-	}
+
 	
 	
 	

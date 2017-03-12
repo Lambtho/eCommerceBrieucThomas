@@ -50,6 +50,7 @@
 				<th>${produit.quantite}</th>
 				<th>${produit.categorie.nomCategorie}</th>
 				<th><a href="admin/soumettreSupProduit?id_param=${produit.idProduit}">Supprimer</a></th>
+				<th><a href="admin/formModifProduit?id_param=${produit.idProduit}">Modifier</a></th>
 			</tr>
 			</c:forEach>
 	</table>
