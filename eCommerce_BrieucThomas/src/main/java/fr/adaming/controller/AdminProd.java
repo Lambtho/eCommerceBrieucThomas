@@ -17,6 +17,7 @@ public class AdminProd extends AdminController {
 		//Mise en place du Formulaire 
 		@RequestMapping(value="formAddCat",method=RequestMethod.GET)
 		public ModelAndView formulaireAddProduit(){
+			System.out.println("je passe par ce controller");
 			return new ModelAndView("addCat","addCategorie",new Categorie());
 		}
 
@@ -26,7 +27,7 @@ public class AdminProd extends AdminController {
 		
 					administrateurService.addCategorie(categorie);		
 		
-					reinitialiser();
+					
 			return "AccueilAdmin";
 }
 		
