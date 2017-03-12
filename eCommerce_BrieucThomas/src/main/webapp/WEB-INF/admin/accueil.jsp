@@ -40,7 +40,7 @@
 			<th>Quantité</th>
 			<th>Catégorie</th>
 		</tr>
-		<c:forEach var="produit" items="${listeProduits}">
+		<c:forEach var="produit" items="${listeProduit}">
 			<tr>
 				<th><img src="/imagesAffich/image${produit.idProduit}.jpg"/></th>
 				<th>${produit.idProduit}</th>
