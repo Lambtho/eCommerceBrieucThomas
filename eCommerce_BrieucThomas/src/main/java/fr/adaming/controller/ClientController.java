@@ -238,6 +238,8 @@ public class ClientController {
 		Commande commande = (Commande) model.get("commande");
 
 		List<LigneCommande> listelcmd = commande.getListeLignesCommandes();
+		if (listelcmd==null)
+			listelcmd = new ArrayList<LigneCommande>();
 
 		// Pour chaque produit du panier on lui associe la quantitée
 		// sélectionnée
