@@ -66,41 +66,33 @@ public class AdminController {
 	//Methode Ajout de Produit--------------------------------------
 	//Mise en place du Formulaire 
 	@RequestMapping(value="formAddProd",method=RequestMethod.GET)
-	public ModelAndView formulaireAddProduit(){
+	public ModelAndView formulaireAddProduit(Model model){
 		System.out.println("je passe par ce controller");
-		return new ModelAndView("addProd","addProduit",new Produit());
+		
+		List<Categorie> listCat=administrateurService.getAllCategorieService();
+		
+		model.addAttribute("listeCategorie",listCat);
+		
+		return new ModelAndView("admin/addProd","addProduit",new Produit());
 	}
 
 	//Soumission du Formulaire
 	@RequestMapping(value="soumettreAddProduit",method=RequestMethod.POST)
-	public String soumettreFormAddProduit(Model model, Produit produit, String idCat,UploadedFile uploadedFile){
+	public String soumettreFormAddProduit(Model model, Produit produit, String idCategorie){
+		System.out.println(idCategorie);
+			
+		
 		// On met la catégorie selectionnée dans le produit
-		produit.setCategorie(administrateurService.getByIdCategorieService(Long.parseLong(idCat)));
-		// On insert l'image si elle existe
-				if (uploadedFile != null) {
-
-					try {
-
-						// On récupère le fichier uploadé
-						InputStream input = uploadedFile.getInputstream();
-
-						// Onle converti en fichier binaire
-						byte[] image = IOUtils.toByteArray(input);
-
-						// On l'ajoute au produit à insérer
-						produit.setImage(image);
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-				}
+		produit.setCategorie(administrateurService.getByIdCategorieService(Long.parseLong(idCategorie)));
+		
+		produit.setImage(null);
+		
 				
 			
 		
 		administrateurService.addProductService(produit);
 				
-		return "AccueilAdmin";
+		return "admin/accueil";
 		
 	}
 	
@@ -119,7 +111,7 @@ public class AdminController {
 		int verif = administrateurService.delProductService(id);
 		
 		
-		return "AccueilAdmin";
+		return "admin/accueil";
 		
 	}
 	
@@ -158,7 +150,7 @@ public class AdminController {
 		
 		administrateurService.updateProductService(produit);
 		
-		return "AccueilAdmin";
+		return "admin/accueil";
 		
 	}
 	
