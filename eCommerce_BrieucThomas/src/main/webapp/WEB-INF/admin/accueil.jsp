@@ -49,6 +49,7 @@
 				<th>${produit.prix}</th>
 				<th>${produit.quantite}</th>
 				<th>${produit.categorie.nomCategorie}</th>
+				<th><a href="admin/soumettreSupProduit?id_param=${produit.idProduit}">Supprimer</a></th>
 			</tr>
 			</c:forEach>
 	</table>

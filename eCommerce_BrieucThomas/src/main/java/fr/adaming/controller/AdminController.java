@@ -78,7 +78,7 @@ public class AdminController {
 
 	//Soumission du Formulaire
 	@RequestMapping(value="soumettreAddProduit",method=RequestMethod.POST)
-	public String soumettreFormAddProduit(Model model, Produit produit, String idCategorie){
+	public String soumettreFormAddProduit(ModelMap model, Produit produit, String idCategorie){
 		System.out.println(idCategorie);
 			
 		
@@ -91,6 +91,9 @@ public class AdminController {
 			
 		
 		administrateurService.addProductService(produit);
+		
+		List<Categorie> listCat=administrateurService.getAllCategorieService();
+		model.put("listeCategorie",listCat);
 				
 		return "admin/accueil";
 		
@@ -106,10 +109,12 @@ public class AdminController {
 	}
 	//Soumission du Formulaire
 	@RequestMapping(value="soumettreSupProduit",method=RequestMethod.GET)
-	public String soumettreSupProduit(Model model,@RequestParam("id_param") int id ){
+	public String soumettreSupProduit(ModelMap model,@RequestParam("id_param") long id ){
+		System.out.println(id);
+		administrateurService.delProductService(id);
 		
-		int verif = administrateurService.delProductService(id);
-		
+		List<Categorie> listCat=administrateurService.getAllCategorieService();
+		model.put("listeCategorie",listCat);
 		
 		return "admin/accueil";
 		
@@ -126,30 +131,13 @@ public class AdminController {
 	
 	//Soumission du formulaire
 	
-	public String soumettreModifProduit(Model model,Produit produit,UploadedFile uploadedFile){
+	public String soumettreModifProduit(ModelMap model,Produit produit,UploadedFile uploadedFile){
 		
-		// On insert l'image si elle existe
-				if (uploadedFile != null) {
-
-					try {
-
-						// On récupère le fichier uploadé
-						InputStream input = uploadedFile.getInputstream();
-
-						// Onle converti en fichier binaire
-						byte[] image = IOUtils.toByteArray(input);
-
-						// On l'ajoute au produit à insérer
-						produit.setImage(image);
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-				}
+		
 		
 		administrateurService.updateProductService(produit);
-		
+		List<Categorie> listCat=administrateurService.getAllCategorieService();
+		model.put("listeCategorie",listCat);
 		return "admin/accueil";
 		
 	}
