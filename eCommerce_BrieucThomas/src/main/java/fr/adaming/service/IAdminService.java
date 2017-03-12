@@ -8,20 +8,6 @@ import fr.adaming.entities.Produit;
 
 public interface IAdminService {
 	
-	/**
-	 * Pour les attribut email et password, verifier si ils 
-	 * sont associés à un AdminProd
-	 * @param admin
-	 * 			l'AdminProd sur lequel ont effectue les verifications
-	 * @return adminRetour
-	 * 			L'AdminProd dont les attributs email et password sont verifiés
-	 * 
-	 * @author Thomas Ngô
-	 * @see AdministrateurServiceImpl#isExistService(AdminProd)
-	 *
-	 */
-	public AdminProd isExistService(AdminProd administrateur);
-	
 	
 	public int addCategorie(Categorie categorie);
 	

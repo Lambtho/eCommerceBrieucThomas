@@ -2,7 +2,8 @@
 
 /* ************************************ Style admin *************************************** */
 body {
-	background-image: url("/eCommerce_BrieucThomas/resources/images/route.jpg");
+	background-image:
+		url("/eCommerce_BrieucThomas/resources/images/route.jpg");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -130,18 +131,14 @@ body {
 	background-color: transparent !important;
 	border: 0 !important;
 }
-
 .formLogin {
 	background-color: rgba(200, 200, 200, 0.5);
 	width: 45%;
-	margin-left: 27.5%;
 	border-radius: 8px;
 	padding: 12px 10px 12px 10px;
 }
-
 .panelLogin {
 	width: 60%;
-	margin-left: 20%;
 }
 
 .titreLogin {
@@ -150,20 +147,26 @@ body {
 	color: white;
 }
 
-
-.formAjout{
+.formAjout {
 	width: 40%;
 	margin-left: 30%;
-	background-color: rgba(230,230,230,0.5);
+	background-color: rgba(230, 230, 230, 0.5);
 	padding: 10px 0 20px 0;
 	border-radius: 8px;
 }
 
-
-.selectId{
+.selectId {
 	margin-left: 22%;
 }
+
 .panelAdmin {
 	width: 40%;
 	margin-left: 15%;
+}
+
+.formAjout {
+	padding-left: 50%;
+	background-color: rgba(255, 255, 255, 0.7);
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.7);
 }

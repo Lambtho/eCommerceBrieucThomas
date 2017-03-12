@@ -26,16 +26,16 @@
 		<!-- Interception des urL -->
 		<security:intercept-url pattern="/admin/cat/**"
 			access="ROLE_ADMIN_CAT" />
-		<security:form-login login-page="/admin/login"
-			authentication-failure-url="/admin/login" />
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login" />
 
-		<security:intercept-url pattern="/admin/prod/**"
+		<security:intercept-url pattern="/admin/**"
 			access="ROLE_ADMIN_CAT,ROLE_ADMIN_PROD" />
-		<security:form-login login-page="/admin/login"
-			authentication-failure-url="/admin/login" />
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login" />
 
 		<security:logout invalidate-session="true"
-			logout-success-url="/admin/login" />
+			logout-success-url="/login" />
 
 	</security:http>
 
@@ -44,8 +44,8 @@
 
 			<security:jdbc-user-service
 				data-source-ref="dataSourceBean1"
-				users-by-username-query="SELECT email_admin as username, password_admin as password, actived FROM administrateurs WHERE username=?"
-				authorities-by-username-query="SELECT a.email_admin as username, r.namerole FROM administrateurs a, roles r WHERE r.id_role=a.role_id_fk AND a.username=?" />
+				users-by-username-query="SELECT email_admin as username, password_admin as password, actived FROM administrateurs WHERE email_admin=?"
+				authorities-by-username-query="SELECT a.email_admin as username, r.namerole FROM administrateurs a, roles r WHERE r.id_role=a.role_id_fk AND a.email_admin=?" />
 
 		</security:authentication-provider>
 	</security:authentication-manager>

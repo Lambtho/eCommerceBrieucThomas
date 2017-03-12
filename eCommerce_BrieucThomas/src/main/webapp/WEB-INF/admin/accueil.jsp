@@ -43,15 +43,17 @@
 		</tr>
 		<c:forEach var="produit" items="${listeProduit}">
 			<tr>
-				<th><img src="/imagesAffich/image${produit.idProduit}.jpg" width="100px"/></th>
+				<th><img
+					src="${pageContext.request.contextPath}/admin/photo?idProduit=${produit.idProduit}"
+					width="100px" /></th>
 				<th>${produit.idProduit}</th>
 				<th>${produit.designation}</th>
 				<th>${produit.description}</th>
 				<th>${produit.prix}</th>
 				<th>${produit.quantite}</th>
 				<th>${produit.categorie.nomCategorie}</th>
-				<th><a href="admin/soumettreSupProduit?id_param=${produit.idProduit}">Supprimer</a></th>
-				<th><a href="admin/formModifProduit?id_param=${produit.idProduit}">Modifier</a></th>
+				<th><a href="${pageContext.request.contextPath}/admin/soumettreSupProduit?id_param=${produit.idProduit}">Supprimer</a></th>
+				<th><a href="${pageContext.request.contextPath}/admin/formModifProduit?id_param=${produit.idProduit}">Modifier</a></th>
 			</tr>
 			</c:forEach>
 	</table>

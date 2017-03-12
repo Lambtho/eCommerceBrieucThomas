@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IAdminDao;
-import fr.adaming.entities.AdminProd;
 import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Produit;
 
@@ -22,12 +21,6 @@ public class AdminServiceImpl implements IAdminService {
 		this.administrateurDao = administrateurDao;
 	}
 	
-
-	@Override
-	public AdminProd isExistService(AdminProd administrateur) {
-		
-		return administrateurDao.isExistDao(administrateur);
-	}
 
 	@Override
 	public int addProductService(Produit produit) {

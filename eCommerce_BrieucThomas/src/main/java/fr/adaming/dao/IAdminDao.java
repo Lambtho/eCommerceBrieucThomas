@@ -7,20 +7,7 @@ import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Produit;
 
 public interface IAdminDao {
-	/**
-	 * Pour les attribut email et password, verifier si ils sont associés à un
-	 * AdminProd
-	 * 
-	 * @param admin
-	 *            l'AdminProd sur lequel ont effectue les verifications
-	 * @return adminRetour L'AdminProd dont les attributs email et password sont
-	 *         verifiés
-	 * 
-	 * @author Thomas Ngô
-	 * @see AdministrateurServiceImpl#isExistService(AdminProd)
-	 *
-	 */
-	public AdminProd isExistDao(AdminProd administrateur);
+	
 
 	/**
 	 * Ajouter un Produit à la base de données

@@ -1,13 +1,10 @@
 package fr.adaming.controller;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.faces.context.FacesContext;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,27 +98,6 @@ public class ClientController {
 
 			// On insert ce produit dans la liste de produits à afficher
 			listeProduits.set(i, p);
-
-			// Dans le cas où il y a une image
-			if (p.getImage() != null) {
-				// Création des liens pour les images
-				try {
-
-					// On crée le fichier (vide) qui recevra l'image dans le
-					// fichier prévu à cet effet
-					FileOutputStream fos = new FileOutputStream(
-							FacesContext.getCurrentInstance().getExternalContext().getRealPath("imagesAffich")
-									+ "/image" + p.getIdProduit() + ".jpg");
-
-					// On écrit l'image dans le fichier créé
-					fos.write(p.getImage());
-
-					// On ferme le stream
-					fos.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		// Création de la liste de catégories

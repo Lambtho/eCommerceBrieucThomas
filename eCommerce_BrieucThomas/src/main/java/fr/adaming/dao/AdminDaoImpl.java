@@ -7,12 +7,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import fr.adaming.entities.AdminProd;
 import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Produit;
 
 @Repository
+@Transactional
 public class AdminDaoImpl implements IAdminDao {
 
 	@Autowired
@@ -22,26 +23,7 @@ public class AdminDaoImpl implements IAdminDao {
 		this.sf = sf;
 	}
 
-	@Override
-	public AdminProd isExistDao(AdminProd administrateur) {
 
-		String req = "SELECT a FROM AdminProd a WHERE a.email=:pEmail AND a.password=:pPassword";
-
-		Session s = sf.getCurrentSession();
-
-		Query query = s.createQuery(req);
-
-		query.setParameter("pEmail", administrateur.getEmail());
-		query.setParameter("pPassword", administrateur.getPassword());
-
-		List<AdminProd> listeAdminProd = query.list();
-
-		if (listeAdminProd.size() == 1) {
-			return listeAdminProd.get(0);
-		}
-
-		return null;
-	}
 
 	@Override
 	public int addProductDao(Produit produit) {
@@ -80,6 +62,7 @@ public class AdminDaoImpl implements IAdminDao {
 
 		Query query = s.createQuery(req);
 
+		@SuppressWarnings("unchecked")
 		List<Produit> listeProduits = query.list();
 
 		return listeProduits;
@@ -110,6 +93,7 @@ public class AdminDaoImpl implements IAdminDao {
 
 		Query query = s.createQuery(req);
 
+		@SuppressWarnings("unchecked")
 		List<Categorie> listCat = query.list();
 
 		return listCat;
