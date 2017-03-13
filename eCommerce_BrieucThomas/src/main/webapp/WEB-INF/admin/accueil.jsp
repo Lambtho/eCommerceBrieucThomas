@@ -41,6 +41,7 @@
 			<th>Quantité</th>
 			<th>Catégorie</th>
 		</tr>
+		
 		<c:forEach var="produit" items="${listeProduit}">
 			<tr>
 				<th><img

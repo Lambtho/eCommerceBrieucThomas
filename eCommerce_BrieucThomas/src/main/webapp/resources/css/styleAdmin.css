@@ -147,9 +147,10 @@ body {
 	color: white;
 }
 
+
 .formAjout {
 	width: 40%;
-	margin-left: 30%;
+/* 	margin-left: 30%; */
 	background-color: rgba(230, 230, 230, 0.5);
 	padding: 10px 0 20px 0;
 	border-radius: 8px;
