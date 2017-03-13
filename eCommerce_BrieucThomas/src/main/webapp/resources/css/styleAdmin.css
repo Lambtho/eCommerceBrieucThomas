@@ -131,12 +131,15 @@ body {
 	background-color: transparent !important;
 	border: 0 !important;
 }
+
 .formLogin {
 	background-color: rgba(200, 200, 200, 0.5);
 	width: 45%;
 	border-radius: 8px;
 	padding: 12px 10px 12px 10px;
+	margin-left: 27.5%;
 }
+
 .panelLogin {
 	width: 60%;
 }
@@ -146,7 +149,6 @@ body {
 	margin: 20px 0 0 30%;
 	color: white;
 }
-
 
 .selectId {
 	margin-left: 22%;

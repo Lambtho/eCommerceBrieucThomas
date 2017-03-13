@@ -2,8 +2,8 @@ package fr.adaming.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +45,28 @@ public class AdminController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String accueil(ModelMap model) {
+	public ModelAndView accueil(ModelMap model) {
 
 		List<Produit> listeProduits = administrateurService.getAllProductService();
-		
+
 		model.put("listeProduit", listeProduits);
 
 		List<Categorie> listCat = administrateurService.getAllCategorieService();
 		model.put("listeCategorie", listCat);
 
-		return "/admin/accueil";
+		model.addAttribute("listeCategorie", listCat);
+
+		List<Produit> listeProduitsAjout = new ArrayList<>();
+		Produit p = new Produit("", "", 0, 0, false);
+		listeProduitsAjout.add(0, p);
+		for(Produit prd:listeProduits){
+			listeProduitsAjout.add(prd);
+		}
+
+		model.addAttribute("listeProduitAjout", listeProduitsAjout);
+
+		return new ModelAndView("admin/accueil", "produitForm", new Produit());
+
 	}
 
 	@RequestMapping(value = "getAllCat", method = RequestMethod.GET)
@@ -81,10 +93,17 @@ public class AdminController {
 	// Soumission du Formulaire
 	@RequestMapping(value = "/soumettreAddProduit", method = RequestMethod.POST)
 	public String soumettreFormAddProduit(ModelMap model, @ModelAttribute("produitForm") Produit produit,
-			String idCategorie, MultipartFile file) {
+			String idCategorie, String idProduit, String description, String designation, String prix, String quantite,
+			MultipartFile file) {
 
 		// On met la catégorie selectionnée dans le produit
 		produit.setCategorie(administrateurService.getByIdCategorieService(Long.parseLong(idCategorie)));
+
+		produit.setIdProduit(Long.parseLong(idProduit));
+		produit.setDescription(description);
+		produit.setDesignation(designation);
+		produit.setPrix(Double.parseDouble(prix));
+		produit.setQuantite(Integer.parseInt(quantite));
 
 		// Récupération de l'image
 		if (!file.isEmpty()) {
@@ -94,8 +113,10 @@ public class AdminController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else{
-			produit.setImage(administrateurService.getByIdProductService(produit.getIdProduit()).getImage());
+		} else {
+			if (produit.getIdProduit() != 0) {
+				produit.setImage(administrateurService.getByIdProductService(produit.getIdProduit()).getImage());
+			}
 		}
 
 		if (produit.getIdProduit() == 0) {
@@ -146,10 +167,12 @@ public class AdminController {
 
 	// Soumission du Formulaire
 	@RequestMapping(value = "/cat/soumettreAddCat", method = RequestMethod.POST)
-	public String soumettreFormAddCategorie(Model model, Categorie categorie) {
+	public String soumettreFormAddCategorie(ModelMap model, Categorie categorie,String nomCategorie, String description) {
 
 		administrateurService.addCategorie(categorie);
 
+		accueil(model);
+		
 		return "admin/accueil";
 	}
 
