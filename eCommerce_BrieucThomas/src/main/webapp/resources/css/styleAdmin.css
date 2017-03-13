@@ -148,14 +148,6 @@ body {
 }
 
 
-.formAjout {
-	width: 40%;
-/* 	margin-left: 30%; */
-	background-color: rgba(230, 230, 230, 0.5);
-	padding: 10px 0 20px 0;
-	border-radius: 8px;
-}
-
 .selectId {
 	margin-left: 22%;
 }
@@ -166,8 +158,11 @@ body {
 }
 
 .formAjout {
-	padding-left: 50%;
+	width: 40%;
+	padding: 10px 0 20px 0;
+	/* 	margin-left: 30%; */
 	background-color: rgba(255, 255, 255, 0.7);
 	text-align: center;
 	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 8px;
 }

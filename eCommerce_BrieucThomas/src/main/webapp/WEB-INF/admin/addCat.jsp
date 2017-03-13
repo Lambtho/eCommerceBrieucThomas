@@ -31,13 +31,13 @@
 		<h1>Ajout d'une Categorie</h1>
 	</div>
 	<br />
-	<div class="formAjout">
+	<div>
 		<form:form method="POST" action="soumettreAddCat"
 			commandName="addCategorie">
 
 			<!-- ModelAttribute ou modelAttribute -->
 
-			<table>
+			<table class="formAjout">
 
 				<tr>
 					<td><form:label path="nomCategorie"> Nom </form:label></td>

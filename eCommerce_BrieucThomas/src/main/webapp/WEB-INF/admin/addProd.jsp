@@ -30,14 +30,14 @@
 		<h1>Ajout/Modification d'un Produit</h1>
 	</div>
 	<br />
-	<div class="formAjout">
+	<div>
 		<form:form method="POST"
 			action="${pageContext.request.contextPath}/admin/soumettreAddProduit"
 			commandName="produitForm" enctype="multipart/form-data">
 
 			<!-- ModelAttribute ou modelAttribute -->
 
-			<table>
+			<table class="formAjout">
 				<tr>
 					<td>${produitForm.idProduit}</td>
 					<td><form:input path="idProduit" cssStyle="display:none" /></td>
