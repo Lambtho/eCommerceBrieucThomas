@@ -1,7 +1,12 @@
 package fr.adaming.controller;
 
+import java.awt.Color;
 import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,6 +22,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.lowagie.text.Cell;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Table;
+import com.lowagie.text.pdf.PdfWriter;
 
 import fr.adaming.entities.Categorie;
 import fr.adaming.entities.Client;
@@ -214,7 +230,7 @@ public class ClientController {
 		Commande commande = (Commande) model.get("commande");
 
 		List<LigneCommande> listelcmd = commande.getListeLignesCommandes();
-		if (listelcmd==null)
+		if (listelcmd == null)
 			listelcmd = new ArrayList<LigneCommande>();
 
 		// Pour chaque produit du panier on lui associe la quantitée
@@ -293,10 +309,15 @@ public class ClientController {
 
 		clientService.orderService(pClient);
 
+		generatePdf(pClient);
+
+		
+		String path = "/eCommerce_BrieucThomas/factures/facture" + commande.getIdCommande() + ".pdf";
+		model.addAttribute("lienFacture", path);
 		accueil(model, "", "");
 		model.put("nbrProduitPanier", 0);
 
-		return "client/accueil";
+		return "client/facture";
 	}
 
 	// Méthode pour récupérer la photo depuis la BDD
@@ -319,6 +340,109 @@ public class ClientController {
 			// Sinon, on retoune la photo
 			return IOUtils.toByteArray(new ByteArrayInputStream(produit.getImage()));
 		}
+
+	}
+
+	@SuppressWarnings("deprecation")
+	public void generatePdf(Client client) {
+
+		Commande commande = client.getListeCommande().get(0);
+		List<LigneCommande> listelcmd = commande.getListeLignesCommandes();
+
+		URL url = this.getClass().getResource("/");
+		
+		String path = "";
+		try {
+			path = URLDecoder.decode(url.getFile(), "UTF-8");
+			path = path.replace("WEB-INF/classes/", "factures/");
+			
+			if (path.startsWith("/")) {
+				path = path.replaceFirst("/", "");
+				
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String pathPdf = path + "/facture" + commande.getIdCommande() + ".pdf";
+
+		Document document = new Document(PageSize.A4);
+		try {
+
+			PdfWriter.getInstance(document, new FileOutputStream(pathPdf));
+
+			document.addTitle("Facture de la commande n°" + commande.getIdCommande());
+
+			document.open();
+
+			Paragraph titre = new Paragraph("Facture de la commande n°" + commande.getIdCommande());
+			titre.setAlignment(Element.ALIGN_CENTER);
+
+			document.add(titre);
+
+			Phrase nomCl = new Phrase(client.getNomClient() + "\n");
+			Phrase adresseCl = new Phrase(client.getAdresse() + "\n");
+			Phrase emailCl = new Phrase(client.getEmail() + "\n");
+			Phrase telephoneCl = new Phrase(client.getTel() + "\n");
+
+			Paragraph coordonneesCl = new Paragraph("Coordonées\n");
+			coordonneesCl.add(nomCl);
+			coordonneesCl.add(adresseCl);
+			coordonneesCl.add(emailCl);
+			coordonneesCl.add(telephoneCl);
+
+			document.add(coordonneesCl);
+
+			Table tableauPanier = new Table(6);
+			tableauPanier.setPadding(2);
+			tableauPanier.setDefaultCellBorderColor(Color.GRAY);
+			tableauPanier.setCellpadding(2);
+
+			// En-têtes
+
+			new Font(Font.HELVETICA, 11, Font.BOLD);
+			Cell cell1 = new Cell("");
+			cell1.setHeader(true);
+			tableauPanier.addCell(cell1);
+			tableauPanier.addCell("Désignation");
+			tableauPanier.addCell("Catégorie");
+			tableauPanier.addCell("Quantité");
+			tableauPanier.addCell("Prix Unitaire (€)");
+			tableauPanier.addCell("Prix Total (€)");
+
+			for (int i = 0; i < listelcmd.size(); i++) {
+
+				tableauPanier.addCell(String.valueOf(i + 1));
+				tableauPanier.addCell(listelcmd.get(i).getProduit().getDesignation());
+				tableauPanier.addCell(listelcmd.get(i).getProduit().getCategorie().getNomCategorie());
+				tableauPanier.addCell(String.valueOf(listelcmd.get(i).getQuantite()));
+				tableauPanier.addCell(String.valueOf(listelcmd.get(i).getProduit().getPrix()));
+				tableauPanier.addCell(String.valueOf(listelcmd.get(i).getPrix()));
+			}
+
+			Paragraph recapCmd = new Paragraph("\n\n\nRécapitulatif de la commande",
+					new Font(Font.TIMES_ROMAN, 15, Font.BOLD));
+
+			recapCmd.add(tableauPanier);
+
+			document.add(recapCmd);
+
+			double totalPanier = 0;
+			for (LigneCommande lcmd : listelcmd) {
+				totalPanier += lcmd.getPrix();
+			}
+
+			Paragraph total = new Paragraph("Total dû :" + totalPanier + " €");
+
+			document.add(total);
+
+		} catch (DocumentException de) {
+			de.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		document.close();
 
 	}
 
