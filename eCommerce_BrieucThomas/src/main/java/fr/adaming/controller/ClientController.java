@@ -132,36 +132,32 @@ public class ClientController {
 				break;
 			}
 		}
-		List<Integer> ListId=new ArrayList<>();
-		List<Produit> listgetAll=administrateurService.getAllProductService();
-		List<Produit> listCarousel=new ArrayList<>();
-		
+		List<Integer> ListId = new ArrayList<>();
+		List<Produit> listgetAll = administrateurService.getAllProductService();
+		List<Produit> listCarousel = new ArrayList<>();
+
 		int flag;
-		while(ListId.size()<=3){
-			int index=(int) (Math.random()*listgetAll.size());
-			 flag=0;
-			 for (int int1 : ListId) {
-				if(index==int1){
-					flag=1;
+		while (ListId.size() <= 3) {
+			int index = (int) (Math.random() * listgetAll.size());
+			flag = 0;
+			for (int int1 : ListId) {
+				if (index == int1) {
+					flag = 1;
 					break;
 				}
-				
+
 			}
-			 if(flag==0){
-				 ListId.add(index);
-			 }
+			if (flag == 0) {
+				ListId.add(index);
+			}
 		}
-		System.out.println(ListId);
+
 		for (Integer int1 : ListId) {
-			
+
 			listCarousel.add(listgetAll.get(int1));
-			
+
 		}
-		
-		System.out.println(listCarousel);
-		
-		
-		
+
 		model.addAttribute("listeProduits", listeProduits);
 		model.put("commande", commande);
 		// Nombre de produits dans le panier
@@ -340,7 +336,6 @@ public class ClientController {
 
 		generatePdf(pClient);
 
-		
 		String path = "/eCommerce_BrieucThomas/factures/facture" + commande.getIdCommande() + ".pdf";
 		model.addAttribute("lienFacture", path);
 		accueil(model, "", "");
@@ -379,15 +374,15 @@ public class ClientController {
 		List<LigneCommande> listelcmd = commande.getListeLignesCommandes();
 
 		URL url = this.getClass().getResource("/");
-		
+
 		String path = "";
 		try {
 			path = URLDecoder.decode(url.getFile(), "UTF-8");
 			path = path.replace("WEB-INF/classes/", "factures/");
-			
+
 			if (path.startsWith("/")) {
 				path = path.replaceFirst("/", "");
-				
+
 			}
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block

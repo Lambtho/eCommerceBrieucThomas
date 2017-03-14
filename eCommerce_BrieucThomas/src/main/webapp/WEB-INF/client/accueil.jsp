@@ -3,17 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<html>
 <head>
 <title>Accueil</title>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap.css" />"
 	rel="stylesheet">
+	<link href="<c:url value="/resources/css/tether.sass" />"
+	rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery-3.1.1.js" />"></script>
+<script src="<c:url value="/resources/js/utils.js" />"></script>
+<script src="<c:url value="/resources/js/tether.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap.js" />"></script>
 </head>
 <body>
@@ -37,54 +37,60 @@
 		</form>
 	</div>
 	<div class="container">
-		<div class=row>
-		<div class=col-md-3 id="carouselTitre1" style="background-color: white;opacity: 0.6"><h2 style="text-align: center;padding-top: 75px;height: 350px">Marre de votre vieille tire?</h2></div>
-		<div id="carouselExampleControls" class="carousel slide col-md-6"
-			data-ride="carousel">
-			<div class="carousel-inner" role="listbox">
-				<div class="carousel-item active">
-					<img class="d-block img-fluid"
-						src="/eCommerce_BrieucThomas/resources/images/2015063011431753.jpg"
-						alt="" width="600px" height="300px">
-						<div class="carousel-caption d-none d-md-block">
-    					<h3 style="color: black;">Bienvenue Sur notre Site</h3>
-    					<h5 style="color: black;">achetez une voiture en quelques click!</h5>
-   						
-  </div>
-				</div>
-				<c:forEach var="car" items="${listeCarousel}" varStatus="status">
-					<div class="carousel-item">
-
-						<img class="d-block img-fluid"
-							src="${pageContext.request.contextPath}/client/photo?idProduit=${car.idProduit}"
-							alt="" width="600px" height="350px">
-						<div class="carousel-caption d-none d-md-block">
-    					<h3 style="color: black;"> ${car.designation}</h3>
-    					
-   						
- 						</div>
-					</div>
-				</c:forEach>
-
-				<!--     <div class="carousel-item"> -->
-				<%--       <img class="d-block img-fluid" src="${pageContext.request.contextPath}/client/photo?idProduit=21" alt="Third slide"> --%>
-				<!--     </div> -->
+		<div class="row row-eq-height" style="height: 350px">
+			<div class="col-md-3" id="carouselTitre1"
+				style="background-color: white; opacity: 0.6">
+				<h2 style="text-align: center; padding-top: 75px; height: 350px">Marre
+					de votre vieille tire?</h2>
 			</div>
-			<a class="carousel-control-prev" href="#carouselExampleControls"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="carousel-control-next" href="#carouselExampleControls"
-				role="button" data-slide="next"> <span
-				class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="sr-only">Next</span>
-			</a>
+			<div id="carouselExampleControls" class="carousel slide col-md-6"
+				data-ride="carousel">
+				<div class="carousel-inner" role="listbox">
+					<div class="carousel-item active">
+						<img class="d-block img-fluid" style="height: 350px"
+							src="/eCommerce_BrieucThomas/resources/images/2015063011431753.jpg"/>
+						<div class="carousel-caption d-none d-md-block">
+							<h3 style="color: black;">Bienvenue Sur notre Site</h3>
+							<h5 style="color: black;">achetez une voiture en quelques
+								click!</h5>
+
+						</div>
+					</div>
+					<c:forEach var="car" items="${listeCarousel}" varStatus="status">
+						<div class="carousel-item">
+
+							<img class="d-block img-fluid" style="height: 350px"
+								src="${pageContext.request.contextPath}/client/photo?idProduit=${car.idProduit}" />
+							<div class="carousel-caption d-none d-md-block">
+								<h3 style="color: black;background-color: rgba(200,200,200,0.3); border-radius: 8px;">${car.designation}</h3>
+
+
+							</div>
+						</div>
+					</c:forEach>
+
+					<!--     <div class="carousel-item"> -->
+					<%--       <img class="d-block img-fluid" src="${pageContext.request.contextPath}/client/photo?idProduit=21" alt="Third slide"> --%>
+					<!--     </div> -->
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleControls"
+					role="button" data-slide="prev"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+					class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next" href="#carouselExampleControls"
+					role="button" data-slide="next"> <span
+					class="carousel-control-next-icon" aria-hidden="true"></span> <span
+					class="sr-only">Next</span>
+				</a>
+			</div>
+			<div class="col-md-3 " id="carouselTitre2"
+				style="background-color: white; opacity: 0.6">
+				<h2 style="text-align: center; padding-top: 75px">Consulter nos
+					tendances du moment</h2>
+			</div>
 		</div>
-		<div class="col-md-3 " id="carouselTitre2" style="background-color: white;opacity: 0.6">
-		<h2 style="text-align: center;padding-top: 75px">Consulter nos tendances du moment</h2></div>
 	</div>
-	</div>
-	Affichage de la liste des produits
+
 	<table class="afficheProd">
 		<tr class="tableHeader">
 			<th>Image</th>
@@ -118,6 +124,8 @@
 		</c:forEach>
 
 	</table>
-<br/>
+	<br />
+	<!-- 	Insertion du footer -->
+	<%@include file="/resources/templates/footerClient.jsp"%>
 </body>
 </html>

@@ -59,7 +59,7 @@ public class AdminController {
 		List<Produit> listeProduitsAjout = new ArrayList<>();
 		Produit p = new Produit("", "", 0, 0, false);
 		listeProduitsAjout.add(0, p);
-		for(Produit prd:listeProduits){
+		for (Produit prd : listeProduits) {
 			listeProduitsAjout.add(prd);
 		}
 
@@ -81,7 +81,6 @@ public class AdminController {
 	// Mise en place du Formulaire
 	@RequestMapping(value = "/formAddProd", method = RequestMethod.GET)
 	public ModelAndView formulaireAddProduit(Model model) {
-		System.out.println("je passe par ce controller");
 
 		List<Categorie> listCat = administrateurService.getAllCategorieService();
 
@@ -136,7 +135,6 @@ public class AdminController {
 	// Soumission du Formulaire
 	@RequestMapping(value = "/soumettreSupProduit", method = RequestMethod.GET)
 	public String soumettreSupProduit(ModelMap model, @RequestParam("id_param") long id) {
-		System.out.println(id);
 		administrateurService.delProductService(id);
 
 		accueil(model);
@@ -167,12 +165,13 @@ public class AdminController {
 
 	// Soumission du Formulaire
 	@RequestMapping(value = "/cat/soumettreAddCat", method = RequestMethod.POST)
-	public String soumettreFormAddCategorie(ModelMap model, Categorie categorie,String nomCategorie, String description) {
+	public String soumettreFormAddCategorie(ModelMap model, Categorie categorie, String nomCategorie,
+			String description) {
 
 		administrateurService.addCategorie(categorie);
 
 		accueil(model);
-		
+
 		return "admin/accueil";
 	}
 
