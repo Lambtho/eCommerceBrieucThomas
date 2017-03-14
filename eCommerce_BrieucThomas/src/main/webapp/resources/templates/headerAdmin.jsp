@@ -1,7 +1,7 @@
 
 <div class="menuCl">
 
-	<a href="${pageContext.request.contextPath}/admin" class="boutonMenuCl"><button
+	<a href="${pageContext.request.contextPath}/client" class="boutonMenuCl"><button
 			type="button" class="btn btn-primary" data-whatever="@mdo">Accueil
 		</button></a>
 	<button type="button" class="btn btn-primary" data-toggle="modal"

@@ -45,19 +45,24 @@
 				<div class="carousel-item active">
 					<img class="d-block img-fluid"
 						src="/eCommerce_BrieucThomas/resources/images/2015063011431753.jpg"
-						alt="" width="100%" height="100%">
+						alt="" width="600px" height="300px">
 						<div class="carousel-caption d-none d-md-block">
     					<h3 style="color: black;">Bienvenue Sur notre Site</h3>
+    					<h5 style="color: black;">achetez une voiture en quelques click!</h5>
    						
   </div>
 				</div>
-				<c:forEach var="car" items="${listeCarousel}">
+				<c:forEach var="car" items="${listeCarousel}" varStatus="status">
 					<div class="carousel-item">
 
 						<img class="d-block img-fluid"
-							src="${pageContext.request.contextPath}/client/photo?idProduit=${car}"
-							alt="" width="100%" height="100%">
-
+							src="${pageContext.request.contextPath}/client/photo?idProduit=${car.idProduit}"
+							alt="" width="600px" height="350px">
+						<div class="carousel-caption d-none d-md-block">
+    					<h3 style="color: black;"> ${car.designation}</h3>
+    					
+   						
+ 						</div>
 					</div>
 				</c:forEach>
 
@@ -113,6 +118,6 @@
 		</c:forEach>
 
 	</table>
-
+<br/>
 </body>
 </html>

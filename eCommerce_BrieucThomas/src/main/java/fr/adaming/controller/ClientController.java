@@ -134,7 +134,7 @@ public class ClientController {
 		}
 		List<Integer> ListId=new ArrayList<>();
 		List<Produit> listgetAll=administrateurService.getAllProductService();
-		List<Long> listCarousel=new ArrayList<>();
+		List<Produit> listCarousel=new ArrayList<>();
 		
 		int flag;
 		while(ListId.size()<=3){
@@ -154,9 +154,10 @@ public class ClientController {
 		System.out.println(ListId);
 		for (Integer int1 : ListId) {
 			
-			listCarousel.add(listgetAll.get(int1).getIdProduit());
+			listCarousel.add(listgetAll.get(int1));
 			
 		}
+		
 		System.out.println(listCarousel);
 		
 		
