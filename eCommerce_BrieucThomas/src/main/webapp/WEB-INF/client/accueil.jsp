@@ -21,6 +21,7 @@
 	<!-- 	Insertion du header -->
 	<%@include file="/resources/templates/headerClient.jsp"%>
 
+
 	<div class="barreRecherche">
 		<!-- Barre de recherche -->
 		<form method="get" action="${pageContext.request.contextPath}/client">
@@ -29,12 +30,56 @@
 					<option value="${cat.idCategorie}">${cat.nomCategorie}</option>
 				</c:forEach>
 			</select> <input class="rechercheBarre" type="text" name="keyword"
-				value="${keyword}" /> <input type="submit" value="Rechercher" class="rechercheBouton">
+				value="${keyword}" /> <input type="submit" value="Rechercher"
+				class="rechercheBouton">
 			<p class="descCat">${categorie.nomCategorie}
 				${categorie.description}</p>
 		</form>
 	</div>
-	<!-- Affichage de la liste des produits -->
+	<div class="container">
+		<div class=row>
+		<div class=col-md-3 id="carouselTitre1" style="background-color: white;opacity: 0.6"><h2 style="text-align: center;padding-top: 75px;height: 350px">Marre de votre vieille tire?</h2></div>
+		<div id="carouselExampleControls" class="carousel slide col-md-6"
+			data-ride="carousel">
+			<div class="carousel-inner" role="listbox">
+				<div class="carousel-item active">
+					<img class="d-block img-fluid"
+						src="/eCommerce_BrieucThomas/resources/images/2015063011431753.jpg"
+						alt="" width="100%" height="100%">
+						<div class="carousel-caption d-none d-md-block">
+    					<h3 style="color: black;">Bienvenue Sur notre Site</h3>
+   						
+  </div>
+				</div>
+				<c:forEach var="car" items="${listeCarousel}">
+					<div class="carousel-item">
+
+						<img class="d-block img-fluid"
+							src="${pageContext.request.contextPath}/client/photo?idProduit=${car}"
+							alt="" width="100%" height="100%">
+
+					</div>
+				</c:forEach>
+
+				<!--     <div class="carousel-item"> -->
+				<%--       <img class="d-block img-fluid" src="${pageContext.request.contextPath}/client/photo?idProduit=21" alt="Third slide"> --%>
+				<!--     </div> -->
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleControls"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleControls"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+		<div class="col-md-3 " id="carouselTitre2" style="background-color: white;opacity: 0.6">
+		<h2 style="text-align: center;padding-top: 75px">Consulter nos tendances du moment</h2></div>
+	</div>
+	</div>
+	Affichage de la liste des produits
 	<table class="afficheProd">
 		<tr class="tableHeader">
 			<th>Image</th>
@@ -68,5 +113,6 @@
 		</c:forEach>
 
 	</table>
+
 </body>
 </html>

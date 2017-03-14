@@ -132,7 +132,35 @@ public class ClientController {
 				break;
 			}
 		}
-
+		List<Integer> ListId=new ArrayList<>();
+		List<Produit> listgetAll=administrateurService.getAllProductService();
+		List<Long> listCarousel=new ArrayList<>();
+		
+		int flag;
+		while(ListId.size()<=3){
+			int index=(int) (Math.random()*listgetAll.size());
+			 flag=0;
+			 for (int int1 : ListId) {
+				if(index==int1){
+					flag=1;
+					break;
+				}
+				
+			}
+			 if(flag==0){
+				 ListId.add(index);
+			 }
+		}
+		System.out.println(ListId);
+		for (Integer int1 : ListId) {
+			
+			listCarousel.add(listgetAll.get(int1).getIdProduit());
+			
+		}
+		System.out.println(listCarousel);
+		
+		
+		
 		model.addAttribute("listeProduits", listeProduits);
 		model.put("commande", commande);
 		// Nombre de produits dans le panier
@@ -140,7 +168,7 @@ public class ClientController {
 		model.put("listeCategories", listeCategories);
 		model.put("keyword", keyword);
 		model.put("idCategorie", idCategorie);
-
+		model.put("listeCarousel", listCarousel);
 		return "client/accueil";
 	}
 
